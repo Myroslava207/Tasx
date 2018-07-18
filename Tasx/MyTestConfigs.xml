@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<configurations>
+  <browser>CH</browser>
+  <username>autoTest1234@i.ua </username>
+  <password>autoTest1234autoTest1234</password>
+  <environment>QA</environment>
+</configurations>  
