@@ -14,38 +14,44 @@ using Tasx.Tests;
 using Tasx.Framework;
 
 
-
-
-namespace Tasx
+namespace Tasx.Tests
 {
+    [TestFixture]
+    [Category("TestAllfunction")]
     class HomeWork : TestBase
     {
         
-
-        [Test]
-        public void LogIn2()
+        public override void OneTimeSetUp()
         {
-            LoginPage LoginP = new LoginPage(driver);
+            driver = WebDriverFactory.GetInstance();
+            AccountPage accountPage = Navigator.NavigateToInbox(driver);
 
-            
-
-            LoginP.SetCheckboxClick();
-            LoginP.SetSelect();
-            LoginP.LoginField();
-
-            Assert.True(LoginP.LoginField().Displayed);
-            Assert.True(LoginP.PasswordField().Displayed);
-            Assert.True(LoginP.Checkbox().Selected);
-
-            LoginP.SetLoginButton();
         }
 
-      
+        //[Test]
+        //public void LogIn2()
+        //{
+        //    LoginPage LoginP = new LoginPage(driver);
 
+
+
+        //    LoginP.SetCheckboxClick();
+        //    LoginP.SetSelect();
+        //    LoginP.LoginField();
+
+        //    Assert.True(LoginP.LoginField().Displayed);
+        //    Assert.True(LoginP.PasswordField().Displayed);
+        //    Assert.True(LoginP.Checkbox().Selected);
+
+        //    LoginP.SetLoginButton();
+        //}
+
+        
         [Test]
         public void CheckYourEmail()
         {
-                      
+
+            
             AccountPage AccountP = new AccountPage(driver);
 
             AccountP.SetAccountTitle();
@@ -59,6 +65,7 @@ namespace Tasx
         public void CheckMails()
         {
             
+
             AccountPage AccountP = new AccountPage(driver);
             
             Assert.AreEqual("Невелика довідка про можливості пошти", AccountP.Message1.Text);
@@ -68,7 +75,8 @@ namespace Tasx
         [Test]
         public void CheckPopup()
         {
-           
+            
+
             AccountPage AccountP = new AccountPage(driver);
 
             AccountP.MoveOnMessage();
@@ -77,132 +85,88 @@ namespace Tasx
            
         }
 
-        [Test]
-        public void DeleteMail()
-        {
-            LoginPage LoginP = new LoginPage(driver);
-            LoginP.SetLoginButton();
-            IWebElement CheckBoxMail = driver.FindElement(By.XPath("//span[text()='Невелика довідка про можливості пошти']"));
-            CheckBoxMail.Click();
+        //[Test]
+        //public void DeleteMail()
+        //{
+        //    LoginPage LoginP = new LoginPage(driver);
+        //    LoginP.SetLoginButton();
+        //    IWebElement CheckBoxMail = driver.FindElement(By.XPath("//span[text()='Невелика довідка про можливості пошти']"));
+        //    CheckBoxMail.Click();
 
-           // Assert.True(CheckBoxMail.Selected);
+        //   // Assert.True(CheckBoxMail.Selected);
 
-            IWebElement Del = driver.FindElement(By.XPath("//span[@buttonname='del']"));
-            Del.Click();
+        //    IWebElement Del = driver.FindElement(By.XPath("//span[@buttonname='del']"));
+        //    Del.Click();
 
-            IAlert alert = driver.SwitchTo().Alert();
-            alert.Accept();
+        //    IAlert alert = driver.SwitchTo().Alert();
+        //    alert.Accept();
 
-            bool isLetterDeleted = false;
+        //    bool isLetterDeleted = false;
             
-            try
-            {
-                CheckBoxMail.Click();
+        //    try
+        //    {
+        //        CheckBoxMail.Click();
 
-            }
-            catch (OpenQA.Selenium.NoSuchElementException)
-            {
-                isLetterDeleted = true;
+        //    }
+        //    catch (OpenQA.Selenium.NoSuchElementException)
+        //    {
+        //        isLetterDeleted = true;
 
-            }
+        //    }
 
-            Assert.True(isLetterDeleted);
+        //    Assert.True(isLetterDeleted);
 
-        }
+        //}
 
-        [Test]
-        public void MultipleWindows()
+        //      [Test]
+        //      public void MultipleWindows()
+        //      {
+        //          IWebElement Login = driver.FindElement(By.XPath("//input[@name='login']"));
+        //          IWebElement Password = driver.FindElement(By.XPath("//input[@name='pass']"));
+        //          IWebElement ButtonLogin = driver.FindElement(By.XPath("/html/body/div[3]/div[3]/div[3]/div[2]/div[1]/div[3]/form/p/input"));
+        //          Login.SendKeys("autoTest1234@i.ua");
+        //          Password.SendKeys("autoTest1234autoTest1234");
+        //          ButtonLogin.Click();
+
+        //          var LoginTitle = driver.FindElement(By.XPath("//span[@class='sn_menu_title']"));
+        //          string LoginCheck = LoginTitle.Text;
+        ////          Assert.AreEqual("autoTest1234@i.ua", LoginTitle.Text);
+
+        //          string CurrentWindow = driver.CurrentWindowHandle;
+        //          IWebElement BasicPage = driver.FindElement(By.XPath("//*[@id='header_overall']/div[1]/ul[1]/li[1]/a"));
+        //          // BasicPage.Click(); 
+
+        //          BasicPage.SendKeys(Keys.Control + Keys.Return);
+
+        //          var windows = driver.WindowHandles;
+
+        //          foreach (var window in windows)
+        //          {
+        //              if (window != CurrentWindow)
+        //              {
+        //                  driver.SwitchTo().Window(window);
+        //              }
+        //          }
+
+        //         IWebElement Logout = driver.FindElement(By.XPath("/html/body/div[2]/div[3]/ul[1]/li[8]/a"));
+        //          Logout.Click();
+
+        //          driver.SwitchTo().Window(CurrentWindow);
+
+        //          driver.Navigate().Refresh();
+
+        //          WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
+        //          wait.Until(p => driver.FindElement(By.XPath("/html/body")).Displayed);
+        //          IWebElement Login1 = driver.FindElement(By.XPath("/ html / body")); 
+        //          Assert.True(Login1.Displayed);
+
+        //}
+
+        
+        public override void OneTimeTearDown()
         {
-            IWebElement Login = driver.FindElement(By.XPath("//input[@name='login']"));
-            IWebElement Password = driver.FindElement(By.XPath("//input[@name='pass']"));
-            IWebElement ButtonLogin = driver.FindElement(By.XPath("/html/body/div[3]/div[3]/div[3]/div[2]/div[1]/div[3]/form/p/input"));
-            Login.SendKeys("autoTest1234@i.ua");
-            Password.SendKeys("autoTest1234autoTest1234");
-            ButtonLogin.Click();
-
-            var LoginTitle = driver.FindElement(By.XPath("//span[@class='sn_menu_title']"));
-            string LoginCheck = LoginTitle.Text;
-  //          Assert.AreEqual("autoTest1234@i.ua", LoginTitle.Text);
-
-            string CurrentWindow = driver.CurrentWindowHandle;
-            IWebElement BasicPage = driver.FindElement(By.XPath("//*[@id='header_overall']/div[1]/ul[1]/li[1]/a"));
-            // BasicPage.Click(); 
-
-            BasicPage.SendKeys(Keys.Control + Keys.Return);
-
-            var windows = driver.WindowHandles;
-
-            foreach (var window in windows)
-            {
-                if (window != CurrentWindow)
-                {
-                    driver.SwitchTo().Window(window);
-                }
-            }
-
-           IWebElement Logout = driver.FindElement(By.XPath("/html/body/div[2]/div[3]/ul[1]/li[8]/a"));
-            Logout.Click();
-
-            driver.SwitchTo().Window(CurrentWindow);
-               
-            driver.Navigate().Refresh();
-
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
-            wait.Until(p => driver.FindElement(By.XPath("/html/body")).Displayed);
-            IWebElement Login1 = driver.FindElement(By.XPath("/ html / body")); 
-            Assert.True(Login1.Displayed);
-
+            driver.Quit();
         }
-
-
-         
-         [TestCase ("Myroslawa95@gmail.com")]
-        public void EditMail(string mail)
-        {
-            
-            AccountPage AccountP = new AccountPage(driver);
-
-            AccountP.SetOpenSavedMessage();
-
-            AccountP.EditToField1Message(mail);
-            AccountP.UploadFiles();
-            AccountP.SetSaveMessageButton();
-
-            AccountP.SetOpenSavedMessage();
-
-            Assert.AreEqual(AccountP.ToFieldMessage.GetAttribute("value"), mail);
-
-            AccountP.SetSaveMessageButton();
-            //AccountP.OpenFolderWithMessages();
-            //AccountP.DeleteMessages();
-
-
-        }
-
-        [Test]
-        public void EditMail2(string body)
-        {
-
-            AccountPage AccountP = new AccountPage(driver);
-
-            AccountP.SetOpenSavedMessage();
-
-            AccountP.EditToField2Message(body);
-            // AccountP.UpoadFiles();
-            AccountP.SetSaveMessageButton();
-
-            AccountP.SetOpenSavedMessage();
-
-            Assert.AreEqual(AccountP.BodyFieldMessage.GetAttribute("value"), body);
-
-            AccountP.SetSaveMessageButton();
-            //AccountP.OpenFolderWithMessages();
-            //AccountP.DeleteMessages();
-
-
-        }
-
-
 
     }
 }

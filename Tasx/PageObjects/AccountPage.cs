@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Tasx.Framework;
 
@@ -38,7 +39,7 @@ namespace Tasx.PageObjects
         public IWebElement CreateMessageButton => driver.FindElement(By.XPath("/html/body/div[1]/div[4]/ul/li[2]/a"));
         public IWebElement ToFieldMessage => driver.FindElement(By.XPath("//textarea[@name = 'to']"));
         public IWebElement SubjectFieldMessage => driver.FindElement(By.XPath("//input[@name = 'subject']"));
-        public IWebElement BodyFieldMessage => driver.FindElement(By.XPath("//div[@class = 'text_editor_browser']"));
+        public IWebElement BodyFieldMessage => driver.FindElement(By.XPath("//*[@id='text']")); //driver.FindElement(By.XPath("//div[@class = 'text_editor_browser']"));
         public IWebElement SaveMessageButton => driver.FindElement(By.XPath("//input[@value = 'Зберегти чернетку']"));
         public IWebElement OpenFolderWithSavedMessages => driver.FindElement(By.XPath("/html/body/div[1]/div[5]/div[2]/div/div/div[2]/div[2]/div[3]/ul/li[3]/a"));
         public IWebElement OpenSavedMessageButton => driver.FindElement(By.XPath("//span[text() = 'Topic this mail']"));
@@ -51,54 +52,63 @@ namespace Tasx.PageObjects
         {
             CreateMessageButton.Click();
             SubjectFieldMessage.SendKeys("Topic this mail");
+            WaitsExtensions.WaitForElementDisplayed(driver, SaveMessageButton, 100);
             SaveMessageButton.Click();
+            Thread.Sleep(5000);
+
         }
 
         public void OpenFolderWithMessages()
+
         {
+            WaitsExtensions.WaitForElementDisplayed(driver, OpenFolderWithSavedMessages, 100);
             OpenFolderWithSavedMessages.Click();
             
         }
         public void SetOpenSavedMessage()
         {
+            WaitsExtensions.WaitForElementDisplayed(driver, OpenFolderWithSavedMessages, 100);
+
             OpenFolderWithSavedMessages.Click();
             OpenSavedMessageButton.Click();
         }
 
 
-        public IWebElement EditToField1Message(string mail)
+        public void EditToField1Message(string mail)
         {
             ToFieldMessage.SendKeys(mail);
-            return ToFieldMessage;
-        }
-        public IWebElement EditToField2Message(string body)
-        {
-            BodyFieldMessage.SendKeys("Myroslawa95@gmail.com");
-            return ToFieldMessage;
         }
 
-        public void UploadFiles()
+        public void EditToField2Message(string body)
         {
-           // string File = "‪1.txt";
-            //string FilesPath = @"C:\\Users\\Myroslava\\Desktop\\" + File;
+            //BodyFieldMessage.Click();
+            //BodyFieldMessage.SendKeys(body);
+            
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(BodyFieldMessage);
+            actions.Click();
+            actions.SendKeys(body);
+            actions.Build().Perform();
+          
+        }
+
+        public void UploadFileToMessage()
+        {
+      
             UploadFile.Click();
             ChooseFileForUpload.Click();
-            ChooseFileForUpload.SendKeys("C:\\Users\\Myroslava\\Desktop\\‪1.txt");
-            DownloadAttachedFile.Click();
-
-
-
+            string File = "‪1.txt";
+            string FilePath = @"‪C:\Users\Myroslava\Desktop\" + File;
+            ChooseFileForUpload.SendKeys(FilePath);
 
         }
+
         public void SetEditSubjectFieldMessage()
         {
             SubjectFieldMessage.SendKeys("Topic this mail");
         }
 
-        public void SetEditBodyFieldMessage()
-        {
-            BodyFieldMessage.SendKeys("Description");
-        }
+ 
 
         public void SetSaveMessageButton()
         {

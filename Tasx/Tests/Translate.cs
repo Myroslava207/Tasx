@@ -12,18 +12,30 @@ using Tasx.Framework;
 using Tasx.Tests;
 
 
-namespace Tasx
+namespace Tasx.Tests
 {
+    [TestFixture]
+    [Category("TestAllfunction")]
     class Translator : TestBase
     {
+        
+        public override void OneTimeSetUp()
+        {
+            driver = WebDriverFactory.GetInstance();
+            Navigator.OpenPage(driver);
+            HomePage hPage = new HomePage(driver);
+            hPage.translitePage.Click();
+
+
+        }
+
         [TestCase("cat", "кот", "Eng")]
         [TestCase("dog", "собака", "Eng")]
         //[TestCase("un chat", "cat", "Fre")]
         public void Testransl(string word, string trans, string language)
         {
             
-            HomePage hPage = new HomePage(driver);
-            hPage.translitePage.Click();
+           
 
             TranslatePage tPage = new TranslatePage(driver);
             tPage.Translate(word);
@@ -35,6 +47,12 @@ namespace Tasx
 
             tPage.SetFieldClear();
         }
+        
+        public override void OneTimeTearDown()
+        {
+            driver.Quit();
+        }
+
 
 
     }

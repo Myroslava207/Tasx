@@ -11,10 +11,11 @@ namespace Tasx.Framework
 {
     public static class WaitsExtensions
     {
-        public static void WaitForElementDisplayed(this IWebDriver driver, IWebElement element, double timeSpan = 4)
+        public static void WaitForElementDisplayed(this IWebDriver driver, IWebElement element, double timeSpan = 100)
         {
             IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeSpan));
             wait.Until(p => element.Displayed);
         }
+        
     }
 }

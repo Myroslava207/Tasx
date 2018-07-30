@@ -12,14 +12,7 @@ namespace Tasx.Framework
 {
     public static class Navigator   
     {
-        //public Navigator()
-        //{
-        //}
-
-        //public static void OneTimeSetUp(IWebDriver driver)
-        //{
-        //    driver.Navigate().GoToUrl("http://www.i.ua/"); 
-        //}
+        
 
         public static LoginPage NavigateToHomePage(IWebDriver driver)
         {
@@ -33,6 +26,12 @@ namespace Tasx.Framework
             LoginPage loginPage = NavigateToHomePage(driver);
             loginPage.Login(TestConfigurations.Username, TestConfigurations.Password);
             return new AccountPage(driver);
+        }
+
+        public static void  OpenPage(IWebDriver driver)
+        {
+            driver.Navigate().GoToUrl("http://www.i.ua/");
+
         }
     }
 }

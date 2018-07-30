@@ -16,14 +16,14 @@ namespace Tasx.Framework
         private static IWebDriver driver = null;
         public static IWebDriver GetInstance()
         {
-            if (driver == null)
-            {
+            //if (driver == null)
+            //{
                 TestConfigurations.Configure();
                 if (TestConfigurations.Browser == chrome)
                 {
                     driver = new ChromeDriver();
                 }
-            }
+            //}
             return driver;
         }
     }

@@ -13,47 +13,61 @@ using Tasx.Tests;
 using Tasx.PageObjects;
 
 namespace Tasx.Tests
+
 {
-   public class TestBase 
+    [TestFixture]
+    public class TestBase 
     {
         public IWebDriver driver;
-        
+        string testname = TestContext.CurrentContext.Test.Name;
+
         [OneTimeSetUp]
         public void BaseOneTimeSetUp()
         {
-            driver = WebDriverFactory.GetInstance();
-            AccountPage accountPage = Navigator.NavigateToInbox(driver);
-            accountPage.SetCreateMEssage(); 
+            OneTimeSetUp();
+        }
 
-
+        public virtual void OneTimeSetUp()
+        {
         }
 
         [SetUp]
         public void BaseSetUp()
         {
-            Console.WriteLine(TestContext.CurrentContext.Test.Name);
-                     
-
+            Console.WriteLine("--------------------------");
+            Console.WriteLine(testname);
+                          
         }
 
         [TearDown]
         public void BaseTearDown()
         {
+            Console.WriteLine("--------------------------");
+
+            Console.WriteLine(TestContext.CurrentContext.Result.Outcome.Status);
+
             
-            Console.WriteLine(TestContext.CurrentContext.Result);
+              var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+            string title = TestContext.CurrentContext.Test.Name;
+            string runname = title + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
+            string filePath = @"C:\";
+
+            screenshot.SaveAsFile(filePath + runname + ".jpg", ScreenshotImageFormat.Jpeg);
+
+
+
+
         }
+
 
         [OneTimeTearDown]
         public void  BaseOneTimeTearDown()
         {
 
-            //AccountPage accountPage = Navigator.NavigateToInbox(driver);
-            //accountPage.OpenFolderWithMessages();
-            //accountPage.DeleteMessages();
-            //driver.SwitchTo().Alert().Accept();
-            driver.Quit();
             OneTimeTearDown();
+            //driver.Quit();
         }
+
         public virtual void OneTimeTearDown()
         {
 
