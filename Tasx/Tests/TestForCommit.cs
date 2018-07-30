@@ -8,5 +8,9 @@ namespace Tasx.Tests
 {
     class TestForCommit
     {
+        public void Test()
+        {
+
+        }
     }
 }
