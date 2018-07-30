@@ -64,6 +64,7 @@
     <Compile Include="PageObjects\LoginPage.cs" />
     <Compile Include="Framework\TestBase.cs" />
     <Compile Include="Tests\EditMassage.cs" />
+    <Compile Include="Tests\TestForCommit.cs" />
     <Compile Include="Tests\Translate.cs" />
     <Compile Include="Tests\HomeWork.cs" />
     <Compile Include="PageObjects\HomePage.cs" />

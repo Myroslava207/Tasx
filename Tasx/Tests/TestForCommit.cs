@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tasx.Tests
 {
-    class HelloGit
+    class TestForCommit
     {
     }
 }
