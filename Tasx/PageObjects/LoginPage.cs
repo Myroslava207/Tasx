@@ -38,6 +38,14 @@ namespace Tasx.PageObjects
         public void SetLoginButton()
         {
             ButtonLogin.Click();
+<<<<<<< HEAD
         }        
+=======
+        }
+
+        // Wrong input credentials (Login or password)
+        public IWebElement IncorrectCredentials() => driver.FindElement(By.XPath("//*[@id='lform_errCtrl']/div[1]"));
+
+>>>>>>> c919d2afd76fadbbac44cd86d57b41092035d642
     }
 }
