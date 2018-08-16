@@ -22,34 +22,27 @@ namespace Tasx.PageObjects
        public IWebElement Translated => driver.FindElement(By.Id("second_textarea"));
        public IWebElement FieldClear => driver.FindElement(By.XPath("//*[@id='first_textarea']"));
 
-
         public void Translate(string word)
         {
             TransliteField.SendKeys(word);
         }
-
         public void SetButtonLanguageDropdown()
         {
             ButtonLanguageDropdown.Click();
         }
-
         public void SetWaitSelectLanguage(string language)
         {
             WaitsExtensions.WaitForElementDisplayed(driver, SelectLanguage(language), 3);
             SelectLanguage(language).Click();
         }
-
         public void SetWaitTranslateButton()
         {
             WaitsExtensions.WaitForElementDisplayed(driver, TranslateButton, 3);
             TranslateButton.Click();
         }
-
         public void SetFieldClear()
         {
             FieldClear.Clear();
         }
-
-
     }
 }

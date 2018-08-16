@@ -25,23 +25,19 @@ namespace Tasx.PageObjects
             PasswordField().SendKeys(password);
             ButtonLogin.Click();
         }
-
         public void SetCheckboxClick()
         {
            Checkbox().Click();
         }
-
         public void SetSelect()
         {
             SelectElement dropdown = new SelectElement(Select());
             string selectedOption = dropdown.SelectedOption.Text;
             dropdown.SelectByText("i.ua"); 
         }
-
         public void SetLoginButton()
         {
             ButtonLogin.Click();
-        }
-        
+        }        
     }
 }

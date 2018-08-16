@@ -35,30 +35,26 @@ namespace Tasx.Tests
         public void BaseSetUp()
         {
             Console.WriteLine("--------------------------");
-            Console.WriteLine(testname);
-                          
+            Console.WriteLine(testname);                         
         }
 
         [TearDown]
         public void BaseTearDown()
         {
             Console.WriteLine("--------------------------");
-
             Console.WriteLine(TestContext.CurrentContext.Result.Outcome.Status);
 
-            
-              var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
-            string title = TestContext.CurrentContext.Test.Name;
-            string runname = title + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
-            string filePath = @"C:\";
+            //  var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+            //string title = TestContext.CurrentContext.Test.Name;
+            //string runname = title + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
+            //string filePath = @"C:\";
 
-            screenshot.SaveAsFile(filePath + runname + ".jpg", ScreenshotImageFormat.Jpeg);
-
-
-
-
+            //screenshot.SaveAsFile(filePath + runname + ".jpg", ScreenshotImageFormat.Jpeg);
+            TearDown();
         }
-
+        public virtual void TearDown()
+        {
+        }
 
         [OneTimeTearDown]
         public void  BaseOneTimeTearDown()

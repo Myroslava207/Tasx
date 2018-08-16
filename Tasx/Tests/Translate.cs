@@ -25,8 +25,6 @@ namespace Tasx.Tests
             Navigator.OpenPage(driver);
             HomePage hPage = new HomePage(driver);
             hPage.translitePage.Click();
-
-
         }
 
         [TestCase("cat", "кот", "Eng")]
@@ -34,9 +32,6 @@ namespace Tasx.Tests
         //[TestCase("un chat", "cat", "Fre")]
         public void Testransl(string word, string trans, string language)
         {
-            
-           
-
             TranslatePage tPage = new TranslatePage(driver);
             tPage.Translate(word);
             tPage.SetButtonLanguageDropdown();
@@ -46,14 +41,10 @@ namespace Tasx.Tests
             Assert.AreEqual(tPage.Translated.GetAttribute("value"), trans);
 
             tPage.SetFieldClear();
-        }
-        
+        }       
         public override void OneTimeTearDown()
         {
             driver.Quit();
         }
-
-
-
     }
 }

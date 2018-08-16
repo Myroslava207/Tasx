@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,33 +53,27 @@ namespace Tasx.PageObjects
         {
             CreateMessageButton.Click();
             SubjectFieldMessage.SendKeys("Topic this mail");
-            WaitsExtensions.WaitForElementDisplayed(driver, SaveMessageButton, 100);
             SaveMessageButton.Click();
-            Thread.Sleep(5000);
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+            wait.Until(p => driver.PageSource.Contains("Лист успішно збережено"));
+
 
         }
-
         public void OpenFolderWithMessages()
-
         {
             WaitsExtensions.WaitForElementDisplayed(driver, OpenFolderWithSavedMessages, 100);
             OpenFolderWithSavedMessages.Click();
-            
         }
         public void SetOpenSavedMessage()
         {
             WaitsExtensions.WaitForElementDisplayed(driver, OpenFolderWithSavedMessages, 100);
-
             OpenFolderWithSavedMessages.Click();
             OpenSavedMessageButton.Click();
-        }
-
-
+        }    
         public void EditToField1Message(string mail)
         {
             ToFieldMessage.SendKeys(mail);
         }
-
         public void EditToField2Message(string body)
         {
             //BodyFieldMessage.Click();
@@ -88,28 +83,20 @@ namespace Tasx.PageObjects
             actions.MoveToElement(BodyFieldMessage);
             actions.Click();
             actions.SendKeys(body);
-            actions.Build().Perform();
-          
+            actions.Build().Perform();          
         }
-
         public void UploadFileToMessage()
-        {
-      
+        {      
             UploadFile.Click();
             ChooseFileForUpload.Click();
             string File = "‪1.txt";
             string FilePath = @"‪C:\Users\Myroslava\Desktop\" + File;
             ChooseFileForUpload.SendKeys(FilePath);
-
         }
-
         public void SetEditSubjectFieldMessage()
         {
             SubjectFieldMessage.SendKeys("Topic this mail");
         }
-
- 
-
         public void SetSaveMessageButton()
         {
             SaveMessageButton.Click();

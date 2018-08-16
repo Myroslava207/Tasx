@@ -51,23 +51,14 @@ namespace Tasx.Tests
         public void CheckYourEmail()
         {
 
-            
             AccountPage AccountP = new AccountPage(driver);
-
-            AccountP.SetAccountTitle();
-                       
+            AccountP.SetAccountTitle();                       
             Assert.AreEqual("autoTest1234@i.ua", AccountP.AccountTitle.Text);
-
-
-
         }
         [Test]
         public void CheckMails()
         {
-            
-
-            AccountPage AccountP = new AccountPage(driver);
-            
+            AccountPage AccountP = new AccountPage(driver);           
             Assert.AreEqual("Невелика довідка про можливості пошти", AccountP.Message1.Text);
             Assert.AreEqual("Ласкаво просимо на I.UA!", AccountP.Message2.Text);
         }
@@ -75,14 +66,10 @@ namespace Tasx.Tests
         [Test]
         public void CheckPopup()
         {
-            
-
             AccountPage AccountP = new AccountPage(driver);
-
             AccountP.MoveOnMessage();
             Thread.Sleep(1000);
-            AccountP.SetWaitTranslateButton();
-           
+            AccountP.SetWaitTranslateButton();         
         }
 
         //[Test]
@@ -161,12 +148,10 @@ namespace Tasx.Tests
         //          Assert.True(Login1.Displayed);
 
         //}
-
-        
+    
         public override void OneTimeTearDown()
         {
             driver.Quit();
         }
-
     }
 }
